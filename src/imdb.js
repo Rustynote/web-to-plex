@@ -14,7 +14,8 @@ function isList() {
 }
 
 function getImdbId() {
-	const tag = document.querySelector('meta[property="pageId"]');
+	// const tag = document.querySelector('meta[property="pageId"]');
+	const tag = document.querySelector('meta[property="imdb:pageConst"]');
 	return tag && tag.content;
 }
 
@@ -36,28 +37,35 @@ function renderPlexButton($parent) {
 	}
 	const el = document.createElement('a');
 	el.classList.add('web-to-plex-button');
+	el.classList.add('ipc-chip');
 	el.style.display = 'none';
 	$parent.appendChild(el);
 	return el;
 }
 
 function initPlexMovie() {
-	const $parent = document.querySelector('.plot_summary');
+	// const $parent = document.querySelector('.plot_summary');
+	const $parent = document.querySelector('.GenresAndPlot__GenresChipList-cum89p-4');
 	const $button = renderPlexButton($parent);
 	if (!$button) {
 		return;
 	}
-	const $title = document.querySelector('.title_wrapper h1');
-	const $year = document.querySelector('.title_wrapper #titleYear');
-	// TODO: Hmm there should be a less risky way...
-	const title = $title.childNodes[0].textContent.trim();
-	const year = cleanYear($year.textContent);
+	
+	var schema = document.querySelector('script[type="application/ld+json"]').innerText;
+	schema = JSON.parse(schema);
+	
+	const title = schema.alternateName || schema.name;
+	// const $year = schema.datePublished.split('-')[0];
+	
+	const $year = document.querySelector('title').textContent.match(/\(([^)]+)\)/)[1]
+	const year = parseInt($year);
 
 	findPlexMedia({ type: 'movie', title, year, button: $button, imdbId });
 }
 
 function initPlexShow() {
-	const $parent = document.querySelector('.plot_summary');
+	// const $parent = document.querySelector('.plot_summary');
+	const $parent = document.querySelector('.GenresAndPlot__GenresChipList-cum89p-4');
 	const $button = renderPlexButton($parent);
 	if (!$button) {
 		return;
