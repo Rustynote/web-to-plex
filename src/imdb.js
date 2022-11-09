@@ -38,34 +38,45 @@ function renderPlexButton($parent) {
 	const el = document.createElement('a');
 	el.classList.add('web-to-plex-button');
 	el.classList.add('ipc-chip');
+	el.classList.add('ipc-chip--on-baseAlt');
 	el.style.display = 'none';
 	$parent.appendChild(el);
 	return el;
 }
 
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value.replace(/'/g, "\\'");;
+}
+
 function initPlexMovie() {
 	// const $parent = document.querySelector('.plot_summary');
-	const $parent = document.querySelector('.GenresAndPlot__GenresChipList-cum89p-4');
+	const $parent = document.querySelector('.ipc-chip-list__scroller');
+	// const $parent = document.querySelector('div[data-testid="genres"]');
 	const $button = renderPlexButton($parent);
 	if (!$button) {
 		return;
 	}
-	
+
 	var schema = document.querySelector('script[type="application/ld+json"]').innerText;
 	schema = JSON.parse(schema);
-	
-	const title = schema.alternateName || schema.name;
+
+	let title = schema.alternateName || schema.name;
+	title = decodeHtml(title);
 	// const $year = schema.datePublished.split('-')[0];
-	
+
 	const $year = document.querySelector('title').textContent.match(/\(([^)]+)\)/)[1]
 	const year = parseInt($year);
+
+	console.log(title, year);
 
 	findPlexMedia({ type: 'movie', title, year, button: $button, imdbId });
 }
 
 function initPlexShow() {
 	// const $parent = document.querySelector('.plot_summary');
-	const $parent = document.querySelector('.GenresAndPlot__GenresChipList-cum89p-4');
+	const $parent = document.querySelector('div[data-testid="genres"]');
 	const $button = renderPlexButton($parent);
 	if (!$button) {
 		return;

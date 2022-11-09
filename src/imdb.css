@@ -1,28 +1,30 @@
 .web-to-plex-button {
 	/*margin-top: 10px;*/
-	display: inline-block;
+	/* display: inline-block;
 	background: #727272;
 	color: #fff!important;
 	padding: 5px 10px;
 	border-radius: 1000px;
 	text-decoration: none!important;
-	text-transform: uppercase;
+	text-transform: uppercase; */
+    padding-top: 4px !important;
+	padding-bottom: 4px !important;
 }
 
 .web-to-plex-button--downloader {
-	background: #f45a26;
+	background: #f45a26 !important;
 }
 
 .web-to-plex-button--downloader:hover {
-	background: #f67e56;
+	background: #f67e56 !important;
 }
 
 .web-to-plex-button--found {
-	background: #e5a00d;
+	background: #e5a00d !important;
 }
 
 .web-to-plex-button--found:hover {
-	background: #f9be03;
+	background: #f9be03 !important;
 }
 
 .list_item .web-to-plex-button {

@@ -10,24 +10,14 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://movieo.me/*"],
-			"js": ["history-hack.js", "utils.js", "movieo.js"],
-			"css": ["movieo.css"]
-		},
-		{
 			"matches": ["*://*.imdb.com/*"],
 			"js": ["utils.js", "imdb.js"],
 			"css": ["imdb.css"]
 		},
 		{
-			"matches": ["https://trakt.tv/*"],
-			"js": ["history-hack.js", "utils.js", "trakt.js"],
-			"css": ["trakt.css"]
-		},
-		{
-			"matches": ["https://letterboxd.com/film/*"],
-			"js": ["utils.js", "letterboxd.js"],
-			"css": ["letterboxd.css"]
+			"matches": ["*://*.yts.mx/*"],
+			"js": ["utils-yts.js", "yts.js"],
+			"css": ["yts.css"]
 		}
 	],
 	"background": {

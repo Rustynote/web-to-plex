@@ -9,6 +9,7 @@ function wait(check, then) {
 }
 
 function getPlexMediaRequest({ button, ...mediaOptions }) {
+	console.log(config);
 	return new Promise((resolve, reject) => {
 		chrome.runtime.sendMessage(
 			{
